@@ -1,4 +1,9 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using ManagerPeople.Data;
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddDbContext<ManagerPeopleContext>(options =>
+    options.UseNpgsql(builder.Configuration.GetConnectionString("ManagerPeopleContext") ?? throw new InvalidOperationException("Connection string 'ManagerPeopleContext' not found.")));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
