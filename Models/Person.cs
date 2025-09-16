@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace ManagerPeople.Models;
 
 using System.ComponentModel.DataAnnotations;
@@ -6,6 +8,8 @@ using System.Text.Json.Serialization;
 
 public class Person
 {
+    [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int Id { get; set; }
     
     [Required(ErrorMessage = "The Name field is required.")]
@@ -17,9 +21,14 @@ public class Person
     
     [Required(ErrorMessage = "The Birthdate field is required.")]
     [DataType(DataType.Date, ErrorMessage = "The Birthdate field is invalid.")]
-    [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
     [CustomValidation(typeof(Person), "ValidateBirthDate")]
-    public DateTime BirthDate { get; set; }
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+    public DateTime BirthDate
+    {
+        get => _birthDate.Date;
+        set => _birthDate = DateTime.SpecifyKind(value, DateTimeKind.Utc);
+    }
+    private DateTime _birthDate;
     
     
     public override string ToString()

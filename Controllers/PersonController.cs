@@ -86,7 +86,7 @@ namespace ManagerPeople
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,Email,BirthDate")] Person person)
+        public async Task<IActionResult> Edit(int id, Person person)
         {
             if (id != person.Id)
             {
