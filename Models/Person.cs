@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations.Schema;
+using ManagerPeople.Models.Enum;
 
 namespace ManagerPeople.Models;
 
@@ -29,6 +30,12 @@ public class Person
         set => _birthDate = DateTime.SpecifyKind(value, DateTimeKind.Utc);
     }
     private DateTime _birthDate;
+    
+    [Required(ErrorMessage = "The CPF field is required.")]
+    public string CPF { get; set; }
+    
+    [Required(ErrorMessage = "The BloodType field is required.")]
+    public EBloodType BloodType { get; set; }
     
     
     public override string ToString()
