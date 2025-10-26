@@ -1,0 +1,52 @@
+@model Person
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Person details</h1>
+
+
+
+<div class="container">
+
+    <input type="hidden" asp-for="Id" readonly/>
+
+    <div class="row g-2">
+        <div class="col-12 col-lg-6">
+            <label for="nome" class="form-label">Name</label>
+            <input class="form-control" type="text" id="nome" asp-for="Name" readonly/>
+        </div>
+        <div class="col-12 col-lg-6">
+            <label for="email" class="form-label">E-mail</label>
+            <input class="form-control" type="text" id="email" asp-for="Email" readonly/>
+
+        </div>
+        <div class="col-12 col-lg-6">
+            @{
+                string birthDateFormated = Model.GetFormattedBirthDate();
+                <label for="birthdate" class="form-label">E-mail</label>
+                <input class="form-control" type="text" id="birthdate" value="@birthDateFormated" readonly/>
+            }
+
+        </div>
+        <div class="col-12 col-lg-6">
+            <label for="CPF" class="form-label">CPF</label>
+            <input type="text" class="form-control" id="CPF" asp-for="CPF" readonly />
+        </div>
+        
+        <div class="col-12 col-lg-6">
+            <label for="bloodtype" class="form-label">BloodType</label>
+            <input class="form-control" type="text" id="bloodtype" asp-for="BloodType" readonly/>
+        </div>
+
+    </div>
+
+    <div class="row mt-2">
+        <div class="form-group">
+            <a type="button" class="btn btn-primary" asp-controller="Person" asp-action="Index">Back</a>
+        </div>
+    </div>
+</div>
+
+

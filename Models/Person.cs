@@ -47,4 +47,9 @@ public class Person
     {
         return birthDate > DateTime.Today ? new ValidationResult("The Birthdate cannot be in the future.") : ValidationResult.Success;
     }
+    
+    public string GetFormattedBirthDate()
+    {
+        return BirthDate == null ? String.Empty : BirthDate.ToString("yyyy-MM-dd");
+    }
 }

@@ -1,8 +1,8 @@
 @using ManagerPeople.Models.Enum
-@model Person
+@model ManagerPeople.Models.Person
 
 @{
-    ViewData["Title"] = "Create Person";
+    ViewData["Title"] = "Edit Person";
 }
 
 @if(TempData["ErrorMessage"] != null)
@@ -12,11 +12,10 @@
     </div>
 }
 
-<h1>Create person register</h1>
+<h1>Edit person register</h1>
 
-
-<form asp-controller="Person" asp-action="Create">
-
+<form asp-controller="Person" asp-action="Edit" asp-route-id="@Model.Id" method="post">
+    <input type="hidden" asp-for="Id"/>
     <div class="row g-2">
         <div class="col-12 col-lg-6">
             <label for="FullName" class="form-label">Full Name*</label>
@@ -24,7 +23,6 @@
                    placeholder="Insert the full name"></input>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-        
         <div class="col-12 col-lg-6">
             <label for="Email" class="form-label">Email*</label>
             <input type="text" class="form-control" id="Email" asp-for="Email"
@@ -56,16 +54,15 @@
         </div>
         <div class="col-12 col-lg-6">
             <label for="BirthDate">Birth Date</label>
-            <input type="date" id="BirthDate" class="form-control" asp-for="BirthDate"/>
+            <input type="date" id="BirthDate" class="form-control" asp-for="BirthDate" value="@Model.GetFormattedBirthDate()"/>
             <span asp-validation-for="BirthDate" class="text-danger"></span>
         </div>
-        
+
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary" />
+            <button type="submit" value="Save" class="btn btn-primary">Save</button>
+            <button type="reset" value="Clear" class="btn btn-primary">Reset</button>
+            <a type="button" class="btn btn-primary" asp-controller="Person" asp-action="Index">Back</a>
+
         </div>
     </div>
-    
-    
-
-
 </form>

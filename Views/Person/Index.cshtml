@@ -3,12 +3,28 @@
     ViewBag.Title = "Person List";
 }
 
+
+@if(TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success" role="alert">
+        @TempData["SuccessMessage"]
+    </div>
+}
+
+@if(TempData["ErrorMessage"] != null)
+{
+    <div class="alert alert-danger" role="alert">
+        @TempData["ErrorMessage"]
+    </div>
+}
+
+
 <h1>Person list</h1>
 
 <a type="button" class="btn btn-primary m-2" asp-controller="Person" asp-action="Create">New Person</a>
 
-<table class="table table-striped">
-    
+<table class="table table-striped table-person">
+    <thead>
     <tr>
         <th scope="col">#</th>
         <th scope="col">Name</th>
@@ -16,19 +32,32 @@
         <th scope="col">BloodType</th>
         <th scope="col">CPF</th>
         <th scope="col">Email</th>
+        <th scope="col">Action</th>
+        
     </tr>
 
+    </thead>
+    
+    <tbody>
     @foreach (Person person in Model)
     {
         <tr>
             <th scope="row">@person.Id</th>
             <td>@person.Name</td>
-            <td>@person.BirthDate.ToString("yyyy/MM/dd")</td>
+            <td>@person.GetFormattedBirthDate()</td>
             <td>@person.BloodType</td>
             <td>@person.CPF</td>
             <td>@person.Email</td>
+            <td>
+                <a asp-controller="Person" asp-action="Details" asp-route-id="@person.Id" role="button" class="btn btn-primary">Details</a>
+                <a asp-controller="Person" asp-action="Edit" asp-route-id="@person.Id" role="button" class="btn btn-primary">Edit</a>
+                <a asp-controller="Person" asp-action="Delete" asp-route-id="@person.Id" role="button" class="btn btn-danger">Delete</a>
+            </td>
         </tr>
     }
+    </tbody>
+   
+   
 
 
 
